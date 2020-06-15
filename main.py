@@ -1,5 +1,7 @@
 import interface as t
 import numpy as np
+import turtle
+import interface as it
 
 def solucionar(tabuleiro):
     'Faz as delimitações de busca'
@@ -63,25 +65,29 @@ def changeIndex(position, boardsize):
 
 ####################   M A I N   ####################
 
-valid = False
-while not valid:  # Definicao de valores de tamanho e posicao inicial
-    str_N = input("Defina o tamanho da matriz quadrada (N² = 4, 9 ou 16): ")
-    N = int(str_N)
-    start = input("Defina a posição inicial da distribuição dos valores (Ex.: A1): ")
-    posInicial = changeIndex(start, N)  # Converte a posicao definida para x, y
-    tabuleiro = np.zeros((N, N))    # Cria uma matriz NxN com zeros
-    root = np.sqrt(N)   # Raiz do tamanho do tabuleiro
-    if int(root + 0.5) ** 2 == N:
-        if 1 < root <= 16:
-            if tabuleiro[posInicial[0]][posInicial[1]] == 0:
-                valid = True
-            else:
-                print('Posição já ocupada!')
-    else:
-        print('Digite um valor correto!')
+if __name__ == '__main__':
 
-print(tabuleiro)
-tabuleiro[posInicial[0]][posInicial[1]] = 1
-solucionar(tabuleiro)
-print("Solução \n")
-print(tabuleiro)
+    valid = False
+    while not valid:  # Definicao de valores de tamanho e posicao inicial
+        str_N = input("Defina o tamanho da matriz quadrada (N² = 4, 9 ou 16): ")
+        N = int(str_N)
+        start = input("Defina a posição inicial da distribuição dos valores (Ex.: A1): ")
+        posInicial = changeIndex(start, N)  # Converte a posicao definida para x, y
+        tabuleiro = np.zeros((N, N))    # Cria uma matriz NxN com zeros
+        root = np.sqrt(N)   # Raiz do tamanho do tabuleiro
+        if int(root + 0.5) ** 2 == N:
+            if 1 < root <= 16:
+                if tabuleiro[posInicial[0]][posInicial[1]] == 0:
+                    valid = True
+                else:
+                    print('Posição já ocupada!')
+        else:
+            print('Digite um valor correto!')
+
+    print(tabuleiro)
+    tabuleiro[posInicial[0]][posInicial[1]] = 1
+    solucionar(tabuleiro)
+    print("Solução \n")
+    print(tabuleiro)
+    it.tabuleiro(-370,-380, 46, 16, tabuleiro)
+    turtle.done()
