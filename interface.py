@@ -76,18 +76,19 @@ def drawQuadrant(x, y, tamQuadrado, N):
     turtle.speed(0)
     turtle.pensize(5)
     raiz = int(np.sqrt(N))
-    if N == 16:
-        for i in range(raiz-1):
-            turtle.penup()
-            turtle.goto(x + ((i + 1) * 4 * tamQuadrado), -400)
-            turtle.pendown()
-            turtle.goto(x + ((i + 1) * 4 * tamQuadrado), 400)
 
-        for j in range(raiz-1):
-            turtle.penup()
-            turtle.goto(-400, y + ((j + 1) * 4 * tamQuadrado))
-            turtle.pendown()
-            turtle.goto(400, y + ((j + 1) * 4 * tamQuadrado))
+    for i in range(raiz-1):
+        turtle.penup()
+        turtle.goto(x + ((i + 1) * raiz * tamQuadrado), (x-20))
+        turtle.pendown()
+        turtle.goto(x + ((i + 1) * raiz * tamQuadrado), -1*(x-20))
+
+    for j in range(raiz-1):
+        turtle.penup()
+        turtle.goto((x-20), y + ((j + 1) * raiz * tamQuadrado))
+        turtle.pendown()
+        turtle.goto(-1*(x-20), y + ((j + 1) * raiz * tamQuadrado))
+
 
 
 # Desenha os indicadores de posicao

@@ -53,7 +53,6 @@ def findEmpty(tabuleiro):
 
     return None
 
-
 def changeIndex(position, boardsize):
     'Converte a notação algébrica para formato index (x, y)'
     position = position.strip().lower()  # strip() -> remove os espacos em branco / lower() -> coloca em minusculo
@@ -89,6 +88,11 @@ if __name__ == '__main__':
     print("--------------------------------------------")
     print("Solução:")
     print(tabuleiro)
+    if N == 16:
+        it.drawTabuleiro(-370, -380, 46, N, tabuleiro)  # Pos_inicial_x, Pos_inicial_y, tamQuadrado, tamTabuleiro, matriz do tabuleiro
+    elif N == 9:
+        it.drawTabuleiro(-210, -210, 46, N, tabuleiro)
+    elif N == 4:
+        it.drawTabuleiro(-95, -95, 46, N, tabuleiro)
 
-    it.drawTabuleiro(-370, -380, 46, N, tabuleiro)  # Pos_inicial_x, Pos_inicial_y, tamQuadrado, tamTabuleiro, matriz do tabuleiro
     turtle.done()
