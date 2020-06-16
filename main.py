@@ -2,6 +2,7 @@ import numpy as np
 import turtle
 import interface as it
 
+
 def solucionar(tabuleiro):
     'Faz as delimitações de busca'
     find = findEmpty(tabuleiro)
@@ -20,6 +21,7 @@ def solucionar(tabuleiro):
             tabuleiro[x][y] = 0
 
     return False
+
 
 def verifica(tabuleiro, num, pos):
     'Faz as delimitações de busca'
@@ -44,14 +46,16 @@ def verifica(tabuleiro, num, pos):
 
     return True
 
+
 def findEmpty(tabuleiro):
-    'Encontra uma posição que esteja que esteja vazia no tabuleiro'
+    'Encontra uma posição que esteja vazia no tabuleiro'
     for i in range(len(tabuleiro)):
         for j in range(len(tabuleiro[0])):
             if tabuleiro[i][j] == 0:
                 return i, j  # linha, coluna
 
     return None
+
 
 def changeIndex(position, boardsize):
     'Converte a notação algébrica para formato index (x, y)'
@@ -61,14 +65,13 @@ def changeIndex(position, boardsize):
     return x, y
 
 
-####################   M A I N   ####################
 if __name__ == '__main__':
 
     valid = False
     while not valid:  # Definicao de valores de tamanho e posicao inicial
         str_N = input("Defina o tamanho da matriz quadrada (N² = 4, 9 ou 16): ")
         N = int(str_N)
-        start = input("Defina a posição inicial da distribuição dos valores (Ex.: A1): ")
+        start = input("Defina a posição inicial da distribuição dos valores (Ex.: A1 [A= Linha | 1= Coluna]): ")
         posInicial = changeIndex(start, N)  # Converte a posicao definida para x, y
         tabuleiro = np.zeros((N, N))    # Cria uma matriz NxN com zeros
         root = np.sqrt(N)   # Raiz do tamanho do tabuleiro
@@ -81,13 +84,18 @@ if __name__ == '__main__':
         else:
             print('Digite um valor correto!')
 
+
+
     print("Tabuleiro Inicial: ")
     print(tabuleiro)
     tabuleiro[posInicial[0]][posInicial[1]] = 1
-    solucionar(tabuleiro)
-    print("--------------------------------------------")
-    print("Solução:")
-    print(tabuleiro)
+    if solucionar(tabuleiro):
+        print("--------------------------------------------")
+        print("Solução:")
+        print(tabuleiro)
+    else:
+        print("Não exite uma solução!")
+
     if N == 16:
         it.drawTabuleiro(-370, -380, 46, N, tabuleiro)  # Pos_inicial_x, Pos_inicial_y, tamQuadrado, tamTabuleiro, matriz do tabuleiro
     elif N == 9:
