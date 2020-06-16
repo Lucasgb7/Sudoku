@@ -1,4 +1,3 @@
-import interface as t
 import numpy as np
 import turtle
 import interface as it
@@ -64,7 +63,6 @@ def changeIndex(position, boardsize):
 
 
 ####################   M A I N   ####################
-
 if __name__ == '__main__':
 
     valid = False
@@ -84,10 +82,13 @@ if __name__ == '__main__':
         else:
             print('Digite um valor correto!')
 
+    print("Tabuleiro Inicial: ")
     print(tabuleiro)
     tabuleiro[posInicial[0]][posInicial[1]] = 1
     solucionar(tabuleiro)
-    print("Solução \n")
+    print("--------------------------------------------")
+    print("Solução:")
     print(tabuleiro)
-    it.tabuleiro(-370,-380, 46, 16, tabuleiro)
+
+    it.tabuleiro(-370, -380, 46, N, tabuleiro)  # Funcao grafica para desenhar o tabuleiro
     turtle.done()
