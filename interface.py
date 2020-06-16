@@ -41,7 +41,6 @@ def drawTabuleiro(x, y, tamQuadrado, N, matriz):
     drawQuadrant(x, y, tamQuadrado, N)  # Desenhar a separacao de quadrante
     drawIndexPos(x, y, tamQuadrado, N)  # Desenha os indices para identificar cada posicao
 
-
 # Desenha um bloco
 def drawSquare(x, y, tamanho, cor, numero):
     # turtle.hideturtle()
@@ -88,8 +87,6 @@ def drawQuadrant(x, y, tamQuadrado, N):
         turtle.goto((x-20), y + ((j + 1) * raiz * tamQuadrado))
         turtle.pendown()
         turtle.goto(-1*(x-20), y + ((j + 1) * raiz * tamQuadrado))
-
-
 
 # Desenha os indicadores de posicao
 def drawIndexPos(x, y, tamQuadrado, N):
