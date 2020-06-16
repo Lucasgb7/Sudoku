@@ -90,5 +90,5 @@ if __name__ == '__main__':
     print("Solução:")
     print(tabuleiro)
 
-    it.tabuleiro(-370, -380, 46, N, tabuleiro)  # Funcao grafica para desenhar o tabuleiro
+    it.drawTabuleiro(-370, -380, 46, N, tabuleiro)  # Pos_inicial_x, Pos_inicial_y, tamQuadrado, tamTabuleiro, matriz do tabuleiro
     turtle.done()

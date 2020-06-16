@@ -21,89 +21,77 @@ cores = {
 }
 
 
-# Desenha um bloco
-def quadrado(posx, posy, lado, cor, num):
-    # turtle.hideturtle()
-    turtle.showturtle()
-    turtle.penup()
-    turtle.goto(posx, posy)
-    turtle.pendown()
-    turtle.fillcolor(cor)
-    turtle.begin_fill()
-    for i in range(4):
-        turtle.forward(lado)
-        turtle.left(90)
-    turtle.end_fill()
-    turtle.hideturtle()
-    drawNum(posx,posy,lado,num)
-
-# Desenha os valores de cada posicao
-def drawNum(posx,posy,tamSquare, num):
-    turtle.showturtle()
-    turtle.penup()
-    turtle.goto(posx+tamSquare/2,(posy+tamSquare/2)-10)
-    turtle.pendown()
-    turtle.write(int(num), align="center", font=("Arial", 12, "normal"))
-    turtle.penup()
-    turtle.goto(posx,posy)
-    turtle.hideturtle()
-
 # Desenha o tabuleiro
-def tabuleiro(posx, posy, lado, N, matriz):
-
+def drawTabuleiro(x, y, tamQuadrado, N, matriz):
     turtle.speed(0)
     # Posicao inicial
     turtle.penup()
-    turtle.goto(posx, posy)
+    turtle.goto(x, y) # Posicao inicial do tabuleiro
     turtle.pendown()
-    for i in range(1, N + 1):
+    for i in range(1, N+1):
         # Desenha linha (i)
-        for j in range(1, N + 1):
+        for j in range(1, N+1):
             pos = matriz[(N - 1) - (i - 1)][(j - 1)]
-            quadrado(turtle.xcor(), turtle.ycor(), lado, cores[pos],pos)
-            turtle.setx(turtle.xcor() + lado)
+            drawSquare(turtle.xcor(), turtle.ycor(), tamQuadrado, cores[pos], pos)
+            turtle.setx(turtle.xcor() + tamQuadrado)
 
         turtle.penup()
-        turtle.goto(posx, turtle.ycor() + lado)
+        turtle.goto(x, turtle.ycor() + tamQuadrado)
         turtle.pendown()
-    drawQuadrant(N, lado, posx, posy)
-    drawIndexPos(posx, posy, lado, N)
+    drawQuadrant(x, y, tamQuadrado, N)  # Desenhar a separacao de quadrante
+    drawIndexPos(x, y, tamQuadrado, N)  # Desenha os indices para identificar cada posicao
+
+
+# Desenha um bloco
+def drawSquare(x, y, tamanho, cor, numero):
+    # turtle.hideturtle()
+    turtle.showturtle()
+    turtle.penup()
+    turtle.goto(x, y)   # Vai a posicao a ser desenhada
+    turtle.pendown()
+    turtle.fillcolor(cor)   # Preenche a cor
+    turtle.begin_fill()
+    for i in range(4):
+        turtle.forward(tamanho)
+        turtle.left(90)
+    turtle.end_fill()
+    turtle.hideturtle()
+    drawNum(x, y, tamanho, numero)  # Funcao para desenhar o numero dentro do quadrado
+
+
+# Desenha os valores de cada posicao
+def drawNum(x, y, tamQuadrado, numero):
+    turtle.showturtle()
+    turtle.penup()
+    turtle.goto(x+tamQuadrado/2, (y+tamQuadrado/2)-10)  # Vai a posicao a ser desenhada (meio do quadrado)
+    turtle.pendown()
+    turtle.write(int(numero), align="center", font=("Arial", 12, "normal")) # Escreve numero
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.hideturtle()
+
 
 # Desenha um quadrante (sqrt(N))
-def drawQuadrant(N, tamSquare, posx, posy):
+def drawQuadrant(x, y, tamQuadrado, N):
     turtle.speed(0)
     turtle.pensize(5)
     raiz = int(np.sqrt(N))
     if N == 16:
-        for x in range(raiz-1):
+        for i in range(raiz-1):
             turtle.penup()
-            turtle.goto(posx + ((x + 1) * 4 * tamSquare), -400)
+            turtle.goto(x + ((i + 1) * 4 * tamQuadrado), -400)
             turtle.pendown()
-            turtle.goto(posx + ((x + 1) * 4 * tamSquare), 400)
+            turtle.goto(x + ((i + 1) * 4 * tamQuadrado), 400)
 
-        for x in range(raiz-1):
+        for j in range(raiz-1):
             turtle.penup()
-            turtle.goto(-400, posy + ((x + 1) * 4 * tamSquare))
+            turtle.goto(-400, y + ((j + 1) * 4 * tamQuadrado))
             turtle.pendown()
-            turtle.goto(400, posy + ((x + 1) * 4 * tamSquare))
-
-
-# Creditos
-def drawCreditos(string, posx, posy, fontsize):
-    turtle.showturtle()
-    turtle.penup()
-    turtle.pencolor("black")
-    turtle.pensize(5)
-    turtle.speed(6)
-    turtle.goto(posx, posy)
-    turtle.write(string, align="left", font=("Arial", fontsize, "normal"))
-    # turtle.pendown()
-    turtle.hideturtle()
-    turtle.pensize(2)
+            turtle.goto(400, y + ((j + 1) * 4 * tamQuadrado))
 
 
 # Desenha os indicadores de posicao
-def drawIndexPos(posx, posy, tamSquare, N):
+def drawIndexPos(x, y, tamQuadrado, N):
     turtle.showturtle()
     turtle.penup()
     turtle.pencolor("black")
@@ -111,27 +99,14 @@ def drawIndexPos(posx, posy, tamSquare, N):
     turtle.speed(0)
     letras = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"]
 
-    for x in range(N):
-        turtle.goto((posx + tamSquare * x) + tamSquare / 2, posy+(tamSquare*N)+5)
-        turtle.write(x+1, align="left", font=("Arial", 10, "normal"))
+    for i in range(N):
+        turtle.goto((x + tamQuadrado * i) + tamQuadrado / 2, y + (tamQuadrado * N) + 5)
+        turtle.write(i+1, align="left", font=("Arial", 10, "normal"))
 
-    for x in range(N):
-        turtle.goto(posx-10, ((posy + tamSquare * x) + tamSquare / 2) - 10)
-        turtle.write(letras[(N-1) - x], align="center", font=("Arial", 10, "normal"))
+    for j in range(N):
+        turtle.goto(x - 10, ((y + tamQuadrado * j) + tamQuadrado / 2) - 10)
+        turtle.write(letras[(N-1) - j], align="center", font=("Arial", 10, "normal"))
 
     turtle.pendown()
     turtle.pensize(2)
     turtle.hideturtle()
-
-def drawPath(i, j):
-    turtle.showturtle()
-    turtle.pencolor("black")
-    turtle.pensize(5)
-    turtle.speed(1)
-
-    turtle.goto((-280 + 70 * i) + 70 / 2, (-280 + 70 * j) + 70 / 2)
-    turtle.pendown()
-
-##if __name__ == '__main__':
-##tabuleiro(-380,-380, 48, 16,"white")
-##turtle.done()
